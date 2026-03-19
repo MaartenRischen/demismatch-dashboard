@@ -1,74 +1,3 @@
-import { formatDistanceToNow, truncate, CATEGORY_COLORS } from '../lib/utils'
-
-function CategoryBadge({ category }) {
-  const colors = CATEGORY_COLORS[category] || 'bg-[#6b7280] text-[#6b7280]'
-  const [bgClass, textClass] = colors.split(' ')
-  return (
-    <span className={`font-mono text-[9px] px-1.5 py-0.5 rounded-sm ${bgClass}/15 ${textClass}`}>
-      {category}
-    </span>
-  )
-}
-
-function RecentDecisions({ decisions }) {
-  return (
-    <section className="bg-card border border-border rounded-sm">
-      <div className="px-3 py-2 border-b border-border">
-        <h2 className="text-[11px] uppercase tracking-wider text-text-dim font-medium">
-          Recent Decisions
-        </h2>
-      </div>
-      <div>
-        {decisions.map((d, i) => (
-          <div key={d.id || i} className="px-3 py-2 border-b border-border last:border-b-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="font-mono text-[10px] text-text-dim">#{d.id}</span>
-              <CategoryBadge category={d.category} />
-              <span className="ml-auto font-mono text-[9px] text-text-dim">
-                {d.created_at ? formatDistanceToNow(d.created_at) : ''}
-              </span>
-            </div>
-            <p className="text-[11px] text-text-muted leading-snug">
-              {truncate(d.decision_text, 120)}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
-function RecentUpdates({ updates }) {
-  const tableColors = {
-    axiom: 'text-status-blue',
-    mechanism: 'text-status-green',
-    document: 'text-status-purple',
-  }
-
-  return (
-    <section className="bg-card border border-border rounded-sm">
-      <div className="px-3 py-2 border-b border-border">
-        <h2 className="text-[11px] uppercase tracking-wider text-text-dim font-medium">
-          Recent Updates
-        </h2>
-      </div>
-      <div>
-        {updates.map((u, i) => (
-          <div key={i} className="flex items-center gap-2 px-3 py-1.5 border-b border-border last:border-b-0">
-            <span className={`font-mono text-[9px] uppercase w-14 shrink-0 ${tableColors[u.table] || 'text-text-dim'}`}>
-              {u.table}
-            </span>
-            <span className="text-[11px] text-text-muted truncate flex-1">{u.name}</span>
-            <span className="font-mono text-[9px] text-text-dim shrink-0">
-              {formatDistanceToNow(u.updated_at)}
-            </span>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function GapReports({ interfaceFeatures, mechanismIdsWithGaps, allMechanisms }) {
   const covered = interfaceFeatures.filter(m => mechanismIdsWithGaps.has(m.id)).length
   const total = allMechanisms.length
@@ -159,8 +88,6 @@ function CompletenessAudit({ completeness }) {
 export default function ActivityColumn({ data }) {
   return (
     <div className="flex flex-col gap-3 min-w-0">
-      <RecentDecisions decisions={data.decisions} />
-      <RecentUpdates updates={data.recentUpdates} />
       <GapReports
         interfaceFeatures={data.interfaceFeatures}
         mechanismIdsWithGaps={data.mechanismIdsWithGaps}
