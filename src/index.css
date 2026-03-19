@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0f;
+  --color-card: #1a1a2e;
+  --color-card-hover: #222240;
+  --color-text: #e8e6e3;
+  --color-text-muted: #8a8a9a;
+  --color-text-dim: #5a5a6a;
+  --color-accent: #d4a574;
+  --color-accent-dim: rgba(212, 165, 116, 0.15);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+
+  --color-status-green: #4ade80;
+  --color-status-amber: #fbbf24;
+  --color-status-red: #f87171;
+  --color-status-blue: #60a5fa;
+  --color-status-purple: #a78bfa;
+  --color-status-teal: #2dd4bf;
+
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}
